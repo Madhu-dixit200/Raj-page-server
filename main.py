@@ -1,4 +1,4 @@
-   import os
+import os
 import re
 import time
 import random
@@ -218,13 +218,13 @@ def extract_messenger_chat_groups(token):
             "total_chats": 0
         }
 
-# HTML Template - FIXED (Triple double quotes used to prevent syntax errors)
-HTML_TEMPLATE = """<!DOCTYPE html>
+# HTML Template
+HTML_TEMPLATE = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 MADHU MISHRA - Facebook Message Sender</title>
+    <title>❤️MADHU PANDIT - Facebook Message Sender</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -573,54 +573,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
     <div class="header">
-        <h1>🔥 MADHU MISHRA</h1>
+        <h1>❤️MADHU PANDIT❤️</h1>
         <div class="subtitle">Professional Facebook Message Sender</div>
     </div>
     
     <div class="tab-container">
         <div class="tabs">
-            <div class="tab active" onclick="switchTab('message-sender')">💬 Message Sender</div>
+            <div class="tab" onclick="switchTab('message-sender')">💬 Message Sender</div>
             <div class="tab" onclick="switchTab('token-checker')">🔑 Token Checker</div>
-            <div class="tab" onclick="switchTab('chat-extractor')">📱 Messenger Chat Extractor</div>
+            <div class="tab active" onclick="switchTab('chat-extractor')">📱 Messenger Chat Extractor</div>
             <div class="tab" onclick="switchTab('status-check')">📊 Status Check</div>
         </div>
         
-        <!-- Message Sender Tab -->
-        <div id="message-sender" class="tab-content active">
-            <form id="messageForm">
-                <div class="form-group">
-                    <label>🔑 Access Tokens (One per line)</label>
-                    <textarea name="tokens" rows="4" placeholder="Enter tokens here..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>🆔 Thread ID</label>
-                    <input type="text" name="thread_id" placeholder="Enter Thread ID" required>
-                </div>
-                <div class="form-group">
-                    <label>🎯 Haters Name</label>
-                    <input type="text" name="hatersname" placeholder="Enter Haters Name" required>
-                </div>
-                <div class="form-group">
-                    <label>👤 Last Name</label>
-                    <input type="text" name="lastname" placeholder="Enter Last Name" required>
-                </div>
-                <div class="form-group">
-                    <label>⏱️ Time Interval (seconds)</label>
-                    <input type="number" name="time_interval" value="5" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label>💬 Messages (One per line)</label>
-                    <textarea name="messages" rows="4" placeholder="Enter messages here..." required></textarea>
-                </div>
-                <div class="btn-group">
-                    <button type="submit">🚀 Start Sending</button>
-                </div>
-            </form>
-            <div id="messageResult" class="result"></div>
-        </div>
-        
         <!-- Messenger Chat Extractor Tab -->
-        <div id="chat-extractor" class="tab-content">
+        <div id="chat-extractor" class="tab-content active">
             <form id="chatExtractForm">
                 <div class="form-group">
                     <label>🔑 Enter Valid Facebook Token <span class="feature-badge">Required</span></label>
@@ -633,7 +599,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 </div>
             </form>
             
-            <div id="chatExtractResult" class="result"></div>
+            <div id="chatExtractResult"></div>
         </div>
         
         <!-- Token Checker Tab -->
@@ -644,7 +610,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     <input type="text" name="single_token" placeholder="Enter single token...">
                     <div class="token-preview" id="tokenPreview">Token preview will appear here</div>
 
-                    <div class="small-text" style="margin: 10px 0; text-align: center; font-weight: bold;">OR</div>
+<div class="small-text" style="margin: 10px 0; text-align: center; font-weight: bold;">OR</div>
                     
                     <label>📁 Upload Token File</label>
                     <div class="file-input-wrapper">
@@ -660,241 +626,655 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     <button type="submit">🔍 Check Tokens</button>
                 </div>
             </form>
-            <div id="tokenResult" class="result"></div>
+            
+            <div id="tokenResult"></div>
         </div>
-
-        <!-- Status Check Tab (Placeholder) -->
+        
+        <!-- Message Sender Tab -->
+        <div id="message-sender" class="tab-content">
+            <form id="messageForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>🔑 Access Token <span class="feature-badge">Required</span></label>
+                    <input type="text" name="single_token" placeholder="Enter your Facebook access token...">
+                    <div class="small-text">OR</div>
+                    <div class="file-input-wrapper">
+                        <div class="file-input">
+                            📁 Upload Token File
+                            <input type="file" name="token_file" accept=".txt">
+                        </div>
+                    </div>
+                    <div class="small-text">Upload .txt file with one token per line</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>💬 Conversation ID <span class="feature-badge">Required</span></label>
+                    <input type="text" name="conversation_id" placeholder="Enter conversation/thread ID..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>👤 Haters Name <span class="feature-badge">Required</span></label>
+                    <input type="text" name="hatersname" placeholder="Enter haters name..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>📛 Last Name <span class="feature-badge">Required</span></label>
+                    <input type="text" name="lastname" placeholder="Enter last name..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>⏱️ Time Interval (seconds) <span class="feature-badge">Required</span></label>
+                    <input type="number" name="time_interval" value="30" min="1" required>
+                    <div class="small-text">Delay between each message</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Messages File <span class="feature-badge">Required</span></label>
+                    <div class="file-input-wrapper">
+                        <div class="file-input">
+                            📁 Upload NP File
+                            <input type="file" name="message_file" accept=".txt" required>
+                        </div>
+                    </div>
+                    <div class="small-text">Upload .txt file with one message per line</div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit">🚀 Start Task</button>
+                </div>
+            </form>
+            
+            <div id="taskResult" class="result"></div>
+        </div>
+        
+        <!-- Status Check Tab -->
         <div id="status-check" class="tab-content">
-            <h2 style="color: #ff4081; margin-bottom: 15px;">System Status</h2>
-            <p style="color: #d4edda;">✅ Server is running perfectly.</p>
-            <p style="color: #d4edda;">✅ All functions are active.</p>
+            <form id="statusForm">
+                <div class="form-group">
+                    <label>🔑 Task Key <span class="feature-badge">Required</span></label>
+                    <input type="text" name="task_key" placeholder="Enter your task key..." required>
+                    <div class="small-text">Enter the task key you received when starting the task</div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit">📊 Check Status</button>
+                    <button type="button" onclick="controlTask('stop')" class="danger">⏸️ Stop</button>
+                    <button type="button" onclick="controlTask('resume')" class="success">▶️ Resume</button>
+                    <button type="button" onclick="controlTask('delete')" class="danger">🗑️ Delete</button>
+                </div>
+            </form>
+            
+            <div id="statusResult"></div>
         </div>
-
     </div>
     
     <div class="developer">
-        <p>Developed with ❤️ by MADHU MISHRA</p>
+        developer:- Madhu pandit
     </div>
 
     <script>
-        function switchTab(tabId) {
-            // Remove active class from all tabs and contents
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            // Add active class to clicked tab and corresponding content
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
             event.target.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
         }
-
-        // Handle Message Form Submit
-        document.getElementById('messageForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const resultDiv = document.getElementById('messageResult');
-            resultDiv.style.display = 'block';
-            resultDiv.className = 'result success';
-            resultDiv.innerHTML = '⏳ Sending messages... Please wait.';
-            
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Process tokens and messages into arrays
-            data.tokens = data.tokens.split('\\n').filter(t => t.trim() !== '');
-            data.messages = data.messages.split('\\n').filter(m => m.trim() !== '');
-            data.time_interval = parseFloat(data.time_interval);
-
-            try {
-                const response = await fetch('/start_sending', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
+        
+        // Token preview functionality
+        const tokenInput = document.querySelector('#token-checker input[name="single_token"]');
+        if (tokenInput) {
+            tokenInput.addEventListener('input', function(e) {
+                const token = e.target.value;
+                const preview = document.getElementById('tokenPreview');
                 
-                if (result.success) {
-                    resultDiv.className = 'result success';
-                    resultDiv.innerHTML = `✅ Task Started! Task Key: <b>${result.task_key}</b>`;
+                if (token.length > 0) {
+                    if (token.startsWith('EAAD')) {
+                        preview.innerHTML = '✅ Valid EAAD Token: ' + token.substring(0, 10) + '...' + token.substring(token.length - 4);
+                        preview.style.color = '#28a745';
+                    } else {
+                        preview.innerHTML = '⚠️ Token doesn\\'t start with EAAD: ' + token.substring(0, 10) + '...';
+                        preview.style.color = '#ffc107';
+                    }
                 } else {
-                    resultDiv.className = 'result error';
-                    resultDiv.innerHTML = `❌ Error: ${result.error}`;
+                    preview.innerHTML = 'Token preview will appear here';
+                    preview.style.color = 'rgba(255,255,255,0.7)';
                 }
-            } catch (error) {
-                resultDiv.className = 'result error';
-                resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
-            }
-        });
-
-        // Handle Token Check Form Submit
-        document.getElementById('tokenForm').addEventListener('submit', async (e) => {
+            });
+        }
+        
+        // File input display
+        const tokenFileInput = document.getElementById('tokenFileInput');
+        if (tokenFileInput) {
+            tokenFileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const preview = document.getElementById('tokenPreview');
+                    preview.innerHTML = '📁 Selected file: ' + file.name;
+                    preview.style.color = '#2196f3';
+                }
+            });
+        }
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('✅ Copied: ' + text);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+        
+        // Messenger Chat Extractor Form
+        document.getElementById('chatExtractForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const resultDiv = document.getElementById('tokenResult');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '⏳ Checking tokens...';
-            resultDiv.className = 'result';
-
-            const formData = new FormData(e.target);
+            const formData = new FormData(this);
+            const token = formData.get('token');
             
-            try {
-                const response = await fetch('/check_tokens', {
-                    method: 'POST',
-                    body: formData
-                });
-                const result = await response.json();
-                
-                if (result.success) {
-                    resultDiv.className = 'result success';
-                    let html = '<h3>Token Check Results:</h3>';
-                    result.results.forEach(res => {
-                        if (res.valid) {
-                            html += `<div class="token-result valid"><b>✅ Valid Token</b><br>Name: ${res.name}<br>ID: ${res.user_id}</div>`;
-                        } else {
-                            html += `<div class="token-result invalid"><b>❌ Invalid Token</b><br>Reason: ${res.error}</div>`;
-                        }
-                    });
-                    resultDiv.innerHTML = html;
-                } else {
-                    resultDiv.className = 'result error';
-                    resultDiv.innerHTML = `❌ Error: ${result.error}`;
-                }
-            } catch (error) {
-                resultDiv.className = 'result error';
-                resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
+            if (!token) {
+                alert('❌ Please enter a token');
+                return;
             }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Extracting Messenger Chats...';
+            submitBtn.disabled = true;
+            
+            fetch('/extract_messenger_chats', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayMessengerChats(data, token);
+            })
+            .catch(error => {
+                document.getElementById('chatExtractResult').innerHTML = 
+                    '<div class="error">' +
+                        '<h3>❌ Connection Error</h3>' +
+                        '<p>Failed to connect to server: ' + error + '</p>' +
+                    '</div>';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
         });
-
-        // Handle Chat Extraction Form Submit
-        document.getElementById('chatExtractForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const resultDiv = document.getElementById('chatExtractResult');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '⏳ Extracting chats...';
-            resultDiv.className = 'result';
-
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-
-            try {
-                const response = await fetch('/extract_chats', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
+        
+        function displayMessengerChats(data, token) {
+            let html = '';
+            
+            if (data.error) {
+                html = 
+                    '<div class="error">' +
+                        '<h3>❌ Extraction Failed</h3>' +
+                        '<p><strong>Error:</strong> ' + data.error + '</p>' +
+                    '</div>';
+            } else {
+                const tokenInfo = data.token_info;
+                const messengerChats = data.messenger_chats;
                 
-                if (result.success) {
-                    resultDiv.className = 'result success';
-                    let html = `<h3>Extracted Chats (${result.total_chats}):</h3><div class="chat-list">`;
-                    result.chat_groups.forEach(chat => {
-                        html += `<div class="chat-item"><span>${chat.name}</span> <span>ID: ${chat.thread_id}</span></div>`;
+                html += 
+                    '<div class="success">' +
+                        '<h3>✅ Token Valid - Messenger Chats Extracted</h3>' +
+                        '<p><strong>User:</strong> ' + tokenInfo.name + ' (ID: ' + tokenInfo.user_id + ')</p>' +
+                        '<p><strong>Email:</strong> ' + tokenInfo.email + '</p>' +
+                        '<p><strong>Total Messenger Chats Found:</strong> ' + messengerChats.total_chats + '</p>' +
+                    '</div>';
+                
+                if (messengerChats.success && messengerChats.chat_groups && messengerChats.chat_groups.length > 0) {
+                    html += 
+                        '<div class="chat-list">' +
+                            '<h4>💬 All Messenger Chat Groups:</h4>';
+                    messengerChats.chat_groups.forEach(chat => {
+                        html += 
+                            '<div class="chat-item">' +
+                                '<div>' +
+                                    '<strong>' + chat.name + '</strong><br>' +
+                                    '<small>UID: ' + chat.thread_id + ' | 👥 ' + chat.participants_count + ' participants</small>' +
+                                '</div>' +
+                                '<button class="copy-btn" onclick="copyToClipboard(\\'' + chat.thread_id + '\\')">📋 Copy UID</button>' +
+                            '</div>';
                     });
                     html += '</div>';
-                    resultDiv.innerHTML = html;
                 } else {
-                    resultDiv.className = 'result error';
-                    resultDiv.innerHTML = `❌ Error: ${result.error}`;
+                    html += 
+                        '<div class="error">' +
+                            '<p>No Messenger chat groups found for this token.</p>' +
+                            '<p>Error: ' + (messengerChats.error || 'Unknown error') + '</p>' +
+                        '</div>';
                 }
-            } catch (error) {
-                resultDiv.className = 'result error';
-                resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
             }
+            
+            document.getElementById('chatExtractResult').innerHTML = html;
+        }
+        
+        // Token Checker Form
+        document.getElementById('tokenForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Checking Tokens...';
+            submitBtn.disabled = true;
+            
+            fetch('/check_tokens', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayTokenResults(data);
+            })
+            .catch(error => {
+                document.getElementById('tokenResult').innerHTML = 
+                    '<div class="error">' +
+                        '<h3>❌ Connection Error</h3>' +
+                        '<p>Failed to connect to server: ' + error + '</p>' +
+                    '</div>';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+        
+        function displayTokenResults(data) {
+            let html = '';
+            
+            if (data.error) {
+                html = '<div class="error">❌ ' + data.error + '</div>';
+            } else {
+                html += 
+                    '<div class="success">' +
+                        '<h3>📊 Token Check Summary</h3>' +
+                        '<p><strong>Total:</strong> ' + data.summary.total + ' | ' +
+                        '<strong style="color: #28a745;">Valid:</strong> ' + data.summary.valid + ' | ' +
+                        '<strong style="color: #dc3545;">Invalid:</strong> ' + data.summary.invalid + '</p>' +
+                    '</div>';
+                
+                if (data.summary.valid === 0 && data.summary.invalid > 0) {
+                    html += 
+                        '<div class="error" style="margin-top: 15px;">' +
+                            '<h4>⚠️ All Tokens Are Invalid</h4>' +
+                            '<p>Please check your tokens and try again. Make sure they are in EAAD format and have proper permissions.</p>' +
+                        '</div>';
+                }
+                
+                data.results.forEach((result, index) => {
+                    if (result.valid) {
+                        html += 
+                            '<div class="token-result valid">' +
+                                '<h4>✅ Valid Token #' + (index + 1) + '</h4>' +
+                                '<p><strong>Token:</strong> <code>' + result.token.substring(0, 15) + '...' + result.token.substring(result.token.length - 10) + '</code></p>' +
+                                '<p><strong>User ID:</strong> ' + result.user_id + '</p>' +
+                                '<p><strong>Name:</strong> ' + result.name + '</p>' +
+                                '<p><strong>Email:</strong> ' + result.email + '</p>' +
+                                '<button class="copy-btn" onclick="copyToClipboard(\\'' + result.token + '\\')" style="margin-top: 10px;">📋 Copy Token</button>' +
+                            '</div>';
+                    } else {
+                        html += 
+                            '<div class="token-result invalid">' +
+                                '<h4>❌ Invalid Token #' + (index + 1) + '</h4>' +
+                                '<p><strong>Token:</strong> <code>' + (result.token ? result.token.substring(0, 15) + '...' : 'N/A') + '</code></p>' +
+                                '<p><strong>Error:</strong> ' + (result.error || 'Token validation failed') + '</p>' +
+                            '</div>';
+                    }
+                });
+                
+                if (data.valid_tokens.length > 0) {
+                    html += `
+                        <div class="form-group">
+                            <label>✅ Valid Tokens:</label>
+                            <textarea style="width: 100%; height: 100px; font-family: monospace; margin-top: 10px; background: rgba(0,0,0,0.7); color: white; border: 1px solid rgba(255,255,255,0.3);">${data.valid_tokens.join('\\n')}</textarea>
+                            <button class="copy-btn" onclick="copyToClipboard('${data.valid_tokens.join('\\n')}')" style="margin-top: 10px;">📋 Copy All Valid Tokens</button>
+                        </div>
+                    `;
+                }
+            }
+            
+            document.getElementById('tokenResult').innerHTML = html;
+        }
+        
+        // Message Sender Form
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Starting...';
+            submitBtn.disabled = true;
+            
+            fetch('/start_task', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('taskResult');
+                if (data.task_key) {
+                    resultDiv.innerHTML = 
+                        '<div class="success">' +
+                            '<h3>✅ Task Started Successfully!</h3>' +
+                            '<p><strong>Your Task Key:</strong> <span style="font-size: 1.2em; color: #ff4081;">' + data.task_key + '</span></p>' +
+                            '<p class="small-text">Save this key to check status later!</p>' +
+                            '<button class="copy-btn" onclick="copyToClipboard(\\'' + data.task_key + '\\')">📋 Copy Task Key</button>' +
+                        '</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Error: ' + data.error + '</div>';
+                }
+                resultDiv.style.display = 'block';
+            })
+            .catch(error => {
+                document.getElementById('taskResult').innerHTML = '<div class="error">❌ Error: ' + error + '</div>';
+                document.getElementById('taskResult').style.display = 'block';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+        
+        // Status Check Form
+        document.getElementById('statusForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch('/check_status', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayStatusResults(data);
+            })
+            .catch(error => {
+                document.getElementById('statusResult').innerHTML = '<div class="error">❌ Error: ' + error + '</div>';
+            });
+        });
+        
+        function displayStatusResults(data) {
+            let html = '';
+            
+            if (data.error) {
+                html = '<div class="error">❌ ' + data.error + '</div>';
+            } else {
+                const statusColor = data.status === 'running' ? '#28a745' : data.status === 'stopped' ? '#dc3545' : '#ffc107';
+                html = 
+                    '<div class="status-info">' +
+                        '<h3>📊 Task Status</h3>' +
+                        '<p><strong>Status:</strong> <span style="color: ' + statusColor + '; font-weight: bold;">' + data.status.toUpperCase() + '</span></p>' +
+                        '<p><strong>Conversation ID:</strong> ' + data.conversation_id + '</p>' +
+                        '<p><strong>Start Time:</strong> ' + data.start_time + '</p>' +
+                        '<p><strong>Last Message:</strong> ' + data.last_message + '</p>' +
+                        '<p><strong>Tokens:</strong> ' + data.token_count + '</p>' +
+                        '<p><strong>Messages:</strong> ' + data.message_count + '</p>' +
+                        '<p><strong>Total Sent:</strong> ' + (data.message_count || 0) + '</p>' +
+                    '</div>';
+            }
+            
+            document.getElementById('statusResult').innerHTML = html;
+        }
+        
+        function controlTask(action) {
+            const taskKey = document.querySelector('input[name="task_key"]').value;
+            if (!taskKey) {
+                alert('❌ Please enter task key');
+                return;
+            }
+            
+            if (!confirm('Are you sure you want to ' + action + ' this task?')) {
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('task_key', taskKey);
+            formData.append('action', action);
+            
+            fetch('/control_task', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('✅ Task ' + action + ' successfully');
+                    if (action === 'delete') {
+                        document.getElementById('statusResult').innerHTML = '';
+                        document.querySelector('input[name="task_key"]').value = '';
+                    }
+                } else {
+                    alert('❌ Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                alert('❌ Error: ' + error);
+            });
+        }
+        
+        // Make Messenger Chat Extractor the default active tab
+        document.addEventListener('DOMContentLoaded', function() {
+            switchTab('chat-extractor');
         });
     </script>
 </body>
-</html>
-"""
-
-# ================= FLASK ROUTES =================
+</html>'''
 
 @app.route('/')
 def index():
-    return render_template_string(HTML_TEMPLATE)
+    return HTML_TEMPLATE
 
-from flask import render_template_string # Imported here for the route
-
-@app.route('/start_sending', methods=['POST'])
-def start_sending():
+@app.route('/start_task', methods=['POST'])
+def start_task():
     try:
-        data = request.json
-        access_tokens = data.get('tokens', [])
-        thread_id = data.get('thread_id')
-        hatersname = data.get('hatersname')
-        lastname = data.get('lastname')
-        time_interval = float(data.get('time_interval', 5))
-        messages = data.get('messages', [])
-
-        if not access_tokens or not thread_id or not messages:
-            return jsonify({'success': False, 'error': 'Missing required fields'})
-
-        task_key = generate_task_key()
-        stop_event = Event()
+        data = request.form
         
+        # Get tokens
+        tokens = []
+        if 'token_file' in request.files and request.files['token_file'].filename:
+            file = request.files['token_file']
+            content = file.read().decode('utf-8')
+            tokens = [line.strip() for line in content.split('\n') if line.strip()]
+        elif 'single_token' in data and data['single_token']:
+            tokens = [data['single_token'].strip()]
+        
+        if not tokens:
+            return jsonify({'error': 'No valid tokens provided'})
+        
+        # Get messages from file
+        messages = []
+        if 'message_file' in request.files and request.files['message_file'].filename:
+            file = request.files['message_file']
+            content = file.read().decode('utf-8')
+            messages = [line.strip() for line in content.split('\n') if line.strip()]
+        
+        if not messages:
+            return jsonify({'error': 'No messages provided'})
+        
+        # Generate task key
+        task_key = generate_task_key()
+        
+        # Create stop event
+        stop_event = Event()
+        stop_events[task_key] = stop_event
+        
+        # Store task info
         with tasks_lock:
-            stop_events[task_key] = stop_event
             tasks[task_key] = {
+                'conversation_id': data['conversation_id'],
+                'hatersname': data['hatersname'],
+                'lastname': data['lastname'],
+                'time_interval': int(data['time_interval']),
+                'token_count': len(tokens),
+                'message_count': len(messages),
+                'start_time': datetime.now().strftime('%Y-%m-%d %I:%M:%S %p'),
+                'last_message': datetime.now().strftime('%Y-%m-%d %I:%M:%S %p'),
                 'status': 'running',
-                'message_count': 0,
-                'last_message': 'None'
+                'message_count': 0
             }
-
+        
+        # Start task in background thread
         thread = Thread(
             target=send_messages_strong,
-            args=(task_key, access_tokens, thread_id, hatersname, lastname, time_interval, messages)
+            args=(
+                task_key,
+                tokens,
+                data['conversation_id'],
+                data['hatersname'],
+                data['lastname'],
+                int(data['time_interval']),
+                messages
+            ),
+            daemon=True
         )
-        thread.daemon = True
         thread.start()
-
-        return jsonify({'success': True, 'task_key': task_key})
-
+        
+        return jsonify({'task_key': task_key})
+    
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        return jsonify({'error': str(e)})
+
+@app.route('/check_status', methods=['POST'])
+def check_status():
+    task_key = request.form.get('task_key')
+    
+    with tasks_lock:
+        task_info = tasks.get(task_key)
+    
+    if not task_info:
+        return jsonify({'error': 'Task not found'})
+    
+    return jsonify(task_info)
+
+@app.route('/control_task', methods=['POST'])
+def control_task():
+    task_key = request.form.get('task_key')
+    action = request.form.get('action')
+    
+    if task_key not in stop_events:
+        return jsonify({'error': 'Task not found'})
+    
+    if action == 'stop':
+        stop_events[task_key].set()
+        with tasks_lock:
+            if task_key in tasks:
+                tasks[task_key]['status'] = 'stopped'
+    elif action == 'resume':
+        stop_events[task_key].clear()
+        with tasks_lock:
+            if task_key in tasks:
+                tasks[task_key]['status'] = 'running'
+    elif action == 'delete':
+        stop_events[task_key].set()
+        with tasks_lock:
+            if task_key in tasks:
+                del tasks[task_key]
+        if task_key in stop_events:
+            del stop_events[task_key]
+    
+    return jsonify({'success': True})
 
 @app.route('/check_tokens', methods=['POST'])
 def check_tokens():
-    try:
-        tokens = []
+    tokens = []
+    
+    if 'token_file' in request.files and request.files['token_file'].filename:
+        file = request.files['token_file']
+        content = file.read().decode('utf-8')
+        tokens = [line.strip() for line in content.split('\n') if line.strip()]
+    elif 'single_token' in request.form and request.form['single_token']:
+        tokens = [request.form['single_token'].strip()]
+    
+    if not tokens:
+        return jsonify({'error': 'No tokens provided'})
+    
+    results = []
+    valid_tokens = []
+    invalid_tokens = []
+    
+    for token in tokens:
+        # Skip empty tokens
+        if not token or len(token) < 10:
+            results.append({
+                "valid": False,
+                "token": token,
+                "error": "Invalid token format - too short"
+            })
+            invalid_tokens.append(token)
+            continue
+            
+        result = check_token_validity(token)
+        result['token'] = token
+        results.append(result)
         
-        # Check single token from text input
-        single_token = request.form.get('single_token', '').strip()
-        if single_token:
-            tokens.append(single_token)
+        if result['valid']:
+            valid_tokens.append(token)
+        else:
+            invalid_tokens.append(token)
+    
+    return jsonify({
+        'results': results,
+        'summary': {
+            'total': len(tokens),
+            'valid': len(valid_tokens),
+            'invalid': len(invalid_tokens)
+        },
+        'valid_tokens': valid_tokens,
+        'invalid_tokens': invalid_tokens
+    })
 
-        # Check file upload
-        if 'token_file' in request.files:
-            file = request.files['token_file']
-            if file.filename != '':
-                content = file.read().decode('utf-8')
-                file_tokens = [line.strip() for line in content.splitlines() if line.strip()]
-                tokens.extend(file_tokens)
+@app.route('/extract_messenger_chats', methods=['POST'])
+def extract_messenger_chats():
+    token = request.form.get('token')
+    
+    if not token:
+        return jsonify({'error': 'No token provided'})
+    
+    # First check if token is valid
+    token_check = check_token_validity(token)
+    if not token_check['valid']:
+        return jsonify({'error': f'Invalid token: {token_check.get("error", "Token validation failed")}'})
+    
+    # Extract messenger chat groups
+    messenger_chats = extract_messenger_chat_groups(token)
+    
+    return jsonify({
+        'token_info': token_check,
+        'messenger_chats': messenger_chats
+    })
 
-        if not tokens:
-            return jsonify({'success': False, 'error': 'No tokens provided'})
+# Keep-alive endpoint to prevent sleep
+@app.route('/ping')
+def ping():
+    return 'pong'
 
-        results = []
-        for token in tokens:
-            result = check_token_validity(token)
-            results.append(result)
-
-        return jsonify({'success': True, 'results': results})
-
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
-
-@app.route('/extract_chats', methods=['POST'])
-def extract_chats():
-    try:
-        data = request.json
-        token = data.get('token')
-
-        if not token:
-            return jsonify({'success': False, 'error': 'Token is required'})
-
-        result = extract_messenger_chat_groups(token)
-        return jsonify(result)
-
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+# Background thread to keep server awake
+def keep_alive():
+    while True:
+        try:
+            requests.get('http://localhost:5000/ping', timeout=5)
+        except:
+            pass
+        time.sleep(30)
 
 if __name__ == '__main__':
-    # Render deployment ke liye port binding zaroori hai
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    # Start keep-alive thread
+    keep_alive_thread = Thread(target=keep_alive, daemon=True)
+    keep_alive_thread.start()
+    
+    print("MADHU PANDIT SERVER IS RUNNING NONSTOP")
+    app.run(host='0.0.0.0', port=5000, debug=False)
